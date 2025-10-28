@@ -1,8 +1,15 @@
-FROM node:20-alpine
-WORKDIR /usr/src/app
+# Build stage
+FROM node:20-alpine AS build
+WORKDIR /app
 COPY package.json ./
-RUN npm install --production
+RUN corepack enable && pnpm install
 COPY . .
-RUN mkdir -p public/uploads data
-EXPOSE 3000
-CMD ["node","app.js"]
+RUN pnpm build
+
+# Production stage
+FROM node:20-alpine AS production
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+RUN npm install -g serve
+EXPOSE 4173
+CMD ["serve", "-s", "dist"]
