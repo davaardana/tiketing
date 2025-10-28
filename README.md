@@ -38,6 +38,14 @@ platform. The project is built with Vite, Tailwind CSS, and a small collection o
    pnpm preview
    ```
 
+## Troubleshooting
+
+- **`npm error code EJSONPARSE` when running `npm install`:** This indicates the
+  `package.json` file still contains merge-conflict markers (for example lines
+  beginning with `<<<<<<<` or `>>>>>>>`). Run `pnpm run check:manifest`
+  (`npm run check:manifest` also works) to verify the manifest parses as valid
+  JSON, then remove any conflict markers before installing again.
+
 ## Scripts
 
 - `pnpm dev` – start the Vite development server.
