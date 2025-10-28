@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded', ()=>{ const btn = document.getElementById('darkToggle'); if(btn) btn.addEventListener('click', ()=>{ document.body.classList.toggle('dark'); }); });
